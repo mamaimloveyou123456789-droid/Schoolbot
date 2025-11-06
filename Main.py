@@ -9,8 +9,12 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from flask import Flask
 from threading import Thread
 
-BOT_TOKEN = "7729089603:AAEFaEjWxT1brw9nbUp1sUmA85Ro2LTTWS0"
-ADMIN_ID = 1927502429
+# БЕЗОПАСНОЕ ПОЛУЧЕНИЕ ДАННЫХ ИЗ ПЕРЕМЕННЫХ СРЕДЫ
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+ADMIN_ID = int(os.environ.get('ADMIN_ID'))
+
+if not BOT_TOKEN or not ADMIN_ID:
+    raise ValueError("BOT_TOKEN и ADMIN_ID должны быть установлены в переменных окружения")
 
 logging.basicConfig(level=logging.INFO)
 
